@@ -4,11 +4,12 @@
 
 import argparse
 from pathlib import Path
-
+import os
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--low-cpu-memory", action="store_true")
+    parser.add_argument("--hf_token", type=str)
     return parser.parse_args()
 
 
@@ -16,6 +17,9 @@ def main() -> int:
     args = parse_args()
     import torch
     from transformers import GPTNeoXForCausalLM, GPTNeoXTokenizerFast
+
+    if args.hf_token:
+        os.environ["HF_TOKEN"] = args.hf_token
 
     print("Loading model...")
     model = GPTNeoXForCausalLM.from_pretrained(
