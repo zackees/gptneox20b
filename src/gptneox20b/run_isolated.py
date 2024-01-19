@@ -15,6 +15,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    
     import torch
     from transformers import GPTNeoXForCausalLM, GPTNeoXTokenizerFast
 

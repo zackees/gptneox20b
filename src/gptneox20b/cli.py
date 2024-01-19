@@ -21,10 +21,12 @@ REQUIRED_PACKAGES = [
 
 
 def main() -> int:
-    env = isolated_environment(VENV_PATH, REQUIRED_PACKAGES)
-    cmds_list = ["python", str(TARGET_PY)] + sys.argv[1:]
-    rtn = subprocess.call(cmds_list, env=env, shell=True)
-    return rtn
+    #env = isolated_environment(VENV_PATH, REQUIRED_PACKAGES)
+    #cmds_list = ["python", str(TARGET_PY)] + sys.argv[1:]
+    #rtn = subprocess.call(cmds_list, env=env, shell=True)
+    #return rtn
+    from gptneox20b.run_isolated import main
+    return main()
 
 
 if __name__ == "__main__":
