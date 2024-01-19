@@ -3,6 +3,7 @@
 # https://colab.research.google.com/drive/1Cngzh5VFrpDqtHcaCYFpW10twsuwGvGy?usp=sharing#scrollTo=D6xY7NlxbIIN
 
 import argparse
+from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
@@ -16,12 +17,16 @@ def main() -> int:
     import torch
     from transformers import GPTNeoXForCausalLM, GPTNeoXTokenizerFast
 
+    print("Loading model...")
     model = GPTNeoXForCausalLM.from_pretrained(
         "EleutherAI/gpt-neox-20b",
         torch_dtype=torch.float32,
         low_cpu_mem_usage=args.low_cpu_memory,
     )
+    print("Loading model finished.\n")
+    print("Loading tokenizer...")
     tokenizer = GPTNeoXTokenizerFast.from_pretrained("EleutherAI/gpt-neox-20b")
+    print("Loading tokenizer finished.\n")
     input_text = "translate English to German: How old are you?"
     print(f"Input text: {input_text}")
     gen_tokens = model.generate(
